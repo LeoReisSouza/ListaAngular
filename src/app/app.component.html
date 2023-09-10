@@ -1,0 +1,25 @@
+<h1 class="title animated jackInTheBox">Lista de tarefas</h1>
+<ul class="animated flipInX" *ngIf="mode=='list'">
+  <p class="text-center" *ngIf="todos.length==0"><small>Você não tem nenhuma tarefa</small></p>
+  <li *ngFor="let todo of todos">
+    {{ todo.title }}
+    <button (click)="remove(todo)">Remover</button>
+    <button *ngIf="!todo.done" (click)="markAsDone(todo)">Concluir</button>
+    <button *ngIf="todo.done" (click)="markAsUndone(todo)">Refazer</button>
+  </li>
+</ul>
+
+<div id="modal" *ngIf="mode=='add'" class="animated flipInX">
+  <h1 class="text-center">Adicionar Tarefa</h1>
+  <form [formGroup]="form">
+    <input type="text" placeholder="Título da Tarefa" maxlength="60" formControlName="title"><br>
+    <p class="text-center">
+      <button [disabled]="form.invalid" (click)="add()" class="button" style="font-size: 16px;">Salvar</button>
+    </p>
+  </form>
+  <br><br>
+</div>
+
+<button class="add-button animated fadeInUp button" (click)="changeMode('add')" style="font-size: 16px; margin-top: 40px" *ngIf="mode=='list'">Nova tarefa</button>
+<button class="add-button animated fadeInUp button" (click)="changeMode('list')" style="font-size: 16px; margin-top: 40px" *ngIf="mode=='add'">Cancelar</button>
+<!-- leo -->
